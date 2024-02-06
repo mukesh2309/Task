@@ -10,7 +10,7 @@ import HomeScreen from '../../screens/home/screen';
 import { font } from '../../theme/fonts';
 import { text } from '../../theme/size';
 import { spacing } from '../../theme/spacing';
-import { MyTabBar } from './options';
+import {MyTabBar} from './options';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -29,6 +29,7 @@ const getStyles = () =>
     tabBarNavigation: {
       height: spacing.value(80),
       borderRadius: spacing.value(30),
+      backgroundColor :'red'
     },
   });
 
@@ -44,7 +45,8 @@ const tabBarLabel = navigation => {
 const TabScreen = () => {
   const styles = getStyles();
   return (
-    <Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
+    <Tab.Navigator
+    tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Categories" component={HomeScreen} />
       <Tab.Screen name="Favorite" component={HomeScreen} />

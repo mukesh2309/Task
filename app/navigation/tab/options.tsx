@@ -1,56 +1,83 @@
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
-import {
-  CategoryIcon,
-  FavoriteIcon,
-  HomeIcon,
-  MoreIcon,
-} from '../../assets/icons';
-import { text } from '../../theme/size';
-import {AntDesign} from 'react-native-vector-icons';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { gray, primary, white } from '../../theme/colors';
+import { font } from '../../theme/fonts';
+import { text } from '../../theme/size';
 import { spacing } from '../../theme/spacing';
-import { primary } from '../../theme/colors';
 
-
-const fillColorIfFocused = '#005EF4';
-const fillColorIfNotFocused = '#000';
-
-const tabBarOptions = (lable:string, focused:boolean) => {
+const tabBarOptions = (lable: string, focused: boolean) => {
   switch (lable) {
     case 'Home':
-      return (
-        <AntDesign
-        name="home"
-        size={spacing[20]}
-        color={primary[800]}
-      />
-      );
+      return <AntDesign name="home" size={spacing[22]} color={primary[800]} />;
     case 'Categories':
       return (
         <MaterialCommunityIcons
-          fillColor={focused ? fillColorIfFocused : fillColorIfNotFocused}
+          name="dots-grid"
+          size={spacing[22]}
+          color={primary[800]}
         />
       );
     case 'Favorite':
       return (
-        <FavoriteIcon
-          fillColor={focused ? fillColorIfFocused : fillColorIfNotFocused}
+        <MaterialIcons
+          name="favorite-border"
+          size={spacing[22]}
+          color={primary[800]}
         />
       );
     case 'More':
       return (
-        <MoreIcon
-          fillColor={focused ? fillColorIfFocused : fillColorIfNotFocused}
+        <Entypo
+          name="dots-three-vertical"
+          size={spacing[20]}
+          color={primary[800]}
         />
       );
   }
 };
 
-function MyTabBar({state, descriptors, navigation}) {
-  console.log('satte', state);
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: white[900],
+    flexDirection: 'row',
+    borderRadius: spacing[30],
+    paddingHorizontal: spacing[20],
+    height: spacing.value(90),
+    // paddingVertical: spacing[20],
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  tab: {
+    flex: 1 / 4,
+    alignItems: 'center',
+  },
+  activeStyle: {
+    backgroundColor: 'yellow',
+    borderRadius: spacing.value(100),
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: spacing.value(100),
+    width: spacing.value(100),
+    borderWidth: spacing[8],
+    borderColor: gray[100],
+    marginBottom: spacing.value(40),
+  },
+});
+
+export const MyTabBar = ({state, descriptors, navigation}) => {
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={styles.container}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const label =
@@ -81,8 +108,6 @@ function MyTabBar({state, descriptors, navigation}) {
           });
         };
 
-        console.log('isFocused', label);
-
         return (
           <Pressable
             accessibilityRole="button"
@@ -91,21 +116,21 @@ function MyTabBar({state, descriptors, navigation}) {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{flex: 1}}>
-            {tabBarOptions(label,isFocused)}
-            <Text
-              style={{
-                color: isFocused ? '#673ab7' : '#222',
-                fontSize: text.large,
-              }}>
-              {label}
-            </Text>
+            style={[styles.tab, isFocused && styles.activeStyle]}>
+            {tabBarOptions(label, isFocused)}
+            {!isFocused ? (
+              <Text
+                style={{
+                  color: gray[500],
+                  fontSize: text.base,
+                  fontFamily: font.Medium,
+                }}>
+                {label}
+              </Text>
+            ) : null}
           </Pressable>
         );
       })}
     </View>
   );
-}
-
-export { MyTabBar };
-
+};
