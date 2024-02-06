@@ -5,19 +5,27 @@ import TextComponent from '../text/component';
 import {black, gray} from '../../theme/colors';
 import {text} from '../../theme/size';
 import CartBtn from '../cartBtn/component';
+import { trunCateStringWith3Dots } from '../../utils/truncateWithThreeDots';
 
-const ProductComponent = () => {
+interface IProductsProps {
+  image: string;
+  key: number;
+  price: string;
+  title: string;
+}
+
+const ProductComponent = ({image, key, price, title}: IProductsProps) => {
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={{uri: 'https://picsum.photos/200'}} />
+    <View key={key} style={styles.container}>
+      <Image style={styles.image} source={{uri: image}} />
       <View style={styles.productPrice}>
         <View>
-          <TextComponent color={black[900]}>$325</TextComponent>
+          <TextComponent color={black[900]}>{price}</TextComponent>
           <TextComponent size={text.base} color={black[500]}>
-            Clown Tang h03
+            {trunCateStringWith3Dots(title,16)}
           </TextComponent>
         </View>
-        <CartBtn/>
+        <CartBtn />
       </View>
     </View>
   );
@@ -29,8 +37,8 @@ const styles = StyleSheet.create({
     maxWidth: spacing.value(160),
     borderRadius: spacing[12],
     justifyContent: 'space-between',
-    backgroundColor : gray[100],
-    marginTop : spacing[20]
+    backgroundColor: gray[100],
+    marginTop: spacing[20],
   },
   image: {
     height: spacing.value(160),
@@ -43,8 +51,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing[8],
     paddingVertical: spacing[4],
     marginBottom: spacing[4],
-    flexDirection :'row',
-    justifyContent:'space-between'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 

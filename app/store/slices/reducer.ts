@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux';
-import searchReducer from './test/slice';
+import productReducer from './product/slice';
 
 export interface RootState {
-  loading: ReturnType<typeof searchReducer>;
+  loading: ReturnType<typeof productReducer>;
 }
 
 const rootReducer = combineReducers({
-  search : searchReducer
+  products : productReducer
 });
 
 export default rootReducer;

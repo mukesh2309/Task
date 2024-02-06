@@ -14,9 +14,6 @@ const ListComponent = ({
 
   return (
     <FlatList
-      style={{
-        flex: 1,
-      }}
       columnWrapperStyle={{justifyContent: 'space-between'}}
       overScrollMode={overScrollMode}
       data={data}
