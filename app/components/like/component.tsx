@@ -1,8 +1,8 @@
 import React from 'react';
-import {Pressable, StyleSheet} from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {black, primary, red, white} from '../../theme/colors';
-import {spacing} from '../../theme/spacing';
+import { black, red } from '../../theme/colors';
+import { spacing } from '../../theme/spacing';
 
 interface LikeBtnProps {
   onPress: (e: any) => void;

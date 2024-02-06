@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import ListComponent from '../../components/listComponent/component';
 import ProductComponent from '../../components/product/component';
@@ -21,62 +21,52 @@ const HomeScreen = () => {
     productSvc.getProducts();
   }, []);
 
-  const scrollViewRef = useRef(null);
-
-  const handleScroll = (event: any) => {
-    const offsetY = event.nativeEvent.contentOffset.y;
-    const contentHeight = event.nativeEvent.contentSize.height;
-    const layoutHeight = event.nativeEvent.layoutMeasurement.height;
-    if (offsetY + layoutHeight >= contentHeight) {
-    }
-  };
-
   return (
     <Wrapper
       statusbar={{
         backgroundColor: primary[900],
         barStyle: 'light-content',
       }}>
-      <ScrollView
-        ref={scrollViewRef}
-        bounces={false}
-        overScrollMode='never'
-        stickyHeaderIndices={[0]}
-        onScroll={handleScroll}
-        scrollEventThrottle={16}>
-        <HomeView
-          user={{
-            name: 'Hey, Rahul',
-          }}
-          onSearch={() => console.log('search')}
-          address={{
-            subTitle: 'DELIVERY TO',
-            title: 'Green Way 3000, Sylhet',
-          }}
-          time={{
-            subTitle: 'WITHIN',
-            title: '1 Hour',
-          }}
-        />
-        <View style={style.container}>
-          <TextComponent size={text.xxl} style={style.title} color={black[900]}>
-            Recommended
-          </TextComponent>
-          <ListComponent
-            data={data.products}
-            numColumns={2}
-            onEndReached={() => console.log('hi')}
-            renderItem={({item, index}) => (
-              <ProductComponent
-                price={item?.price}
-                title={item?.title}
-                image={item?.images[0]}
-                key={item.id}
+      <View style={style.container}>
+        <ListComponent
+          contentContainerStyle={style.flatList}
+          ListHeaderComponent={
+            <View style={style.header}>
+              <HomeView
+                user={{
+                  name: 'Hey, Rahul',
+                }}
+                onSearch={() => console.log('search')}
+                address={{
+                  subTitle: 'DELIVERY TO',
+                  title: 'Green Way 3000, Sylhet',
+                }}
+                time={{
+                  subTitle: 'WITHIN',
+                  title: '1 Hour',
+                }}
               />
-            )}
-          />
-        </View>
-      </ScrollView>
+              <TextComponent
+                size={text.x_xs}
+                style={style.title}
+                color={black[900]}>
+                Recommended
+              </TextComponent>
+            </View>
+          }
+          data={data.products}
+          numColumns={2}
+          onEndReached={() => console.log('hi')}
+          renderItem={({item, index}) => (
+            <ProductComponent
+              price={item?.price}
+              title={item?.title}
+              image={item?.images[0]}
+              key={item.id}
+            />
+          )}
+        />
+      </View>
     </Wrapper>
   );
 };
@@ -84,11 +74,18 @@ const HomeScreen = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: spacing[20],
+    // paddingHorizontal: spacing[20],
     paddingBottom: spacing.value(90),
   },
+  header :{
+    marginHorizontal : -spacing.value(20)
+  },
   title: {
-    paddingTop : spacing[10]
+    paddingTop: spacing[10],
+    paddingHorizontal : spacing[20]
+  },
+  flatList: {
+    paddingHorizontal: spacing[20],
   },
 });
 export default HomeScreen;

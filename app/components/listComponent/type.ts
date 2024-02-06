@@ -10,4 +10,7 @@ export interface listcomponent {
   overScrollMode: 'auto' | 'always' | 'never';
   numColumns: number;
   onScroll : (e: any) => any;
+  ListHeaderComponent: React.ReactNode | any;
+  style : any;
+  contentContainerStyle : any;
 }

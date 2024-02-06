@@ -9,11 +9,17 @@ const ListComponent = ({
   onEndReached,
   overScrollMode = 'always',
   numColumns = 1,
-  onScroll
+  onScroll,
+  ListHeaderComponent,
+  style,
+  contentContainerStyle
 }: listcomponent) => {
 
   return (
     <FlatList
+    style={style}
+    contentContainerStyle={contentContainerStyle}
+     ListHeaderComponent={ListHeaderComponent}
       columnWrapperStyle={{justifyContent: 'space-between'}}
       overScrollMode={overScrollMode}
       data={data}
