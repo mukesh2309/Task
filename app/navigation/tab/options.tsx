@@ -1,13 +1,12 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {black, gray, primary, secondary, white} from '../../theme/colors';
-import {font} from '../../theme/fonts';
-import {text} from '../../theme/size';
-import {spacing} from '../../theme/spacing';
+import { black, secondary } from '../../theme/colors';
+import { spacing } from '../../theme/spacing';
+import { styles } from './style';
 
 const tabBarOptions = (lable: string, focused: boolean) => {
   switch (lable) {
@@ -46,46 +45,6 @@ const tabBarOptions = (lable: string, focused: boolean) => {
       );
   }
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: white[900],
-    flexDirection: 'row',
-    borderRadius: spacing[30],
-    paddingHorizontal: spacing[20],
-    height: spacing.value(90),
-
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  tab: {
-    flex: 1 / 4,
-    alignItems: 'center',
-  },
-  tabText: {
-    color: gray[500],
-    fontSize: text.base,
-    fontFamily: font.Medium,
-  },
-  activeStyle: {
-    backgroundColor: black[900],
-    borderRadius: spacing.value(100),
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: spacing.value(100),
-    width: spacing.value(100),
-    borderWidth: spacing[8],
-    borderColor: gray[100],
-    marginBottom: spacing.value(40),
-  },
-});
 
 export const MyTabBar = ({state, descriptors, navigation}) => {
   return (
@@ -128,9 +87,13 @@ export const MyTabBar = ({state, descriptors, navigation}) => {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={[styles.tab, isFocused && styles.activeStyle]}>
-            {tabBarOptions(label, isFocused)}
-            {!isFocused ? <Text style={[styles.tabText]}>{label}</Text> : null}
+            style={[styles.tabContainer]}>
+            <View style={[styles.tab, isFocused && styles.activeStyle]}>
+              {tabBarOptions(label, isFocused)}
+              {!isFocused ? (
+                <Text style={[styles.tabText]}>{label}</Text>
+              ) : null}
+            </View>
           </Pressable>
         );
       })}
