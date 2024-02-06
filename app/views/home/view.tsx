@@ -1,11 +1,11 @@
-import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
-import {gray, primary, white} from '../../theme/colors';
-import {spacing} from '../../theme/spacing';
-import TextComponent from '../../components/text/component';
-import InputComponent from '../../components/input/component';
+import { StyleSheet, View } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {text} from '../../theme/size';
+import InputComponent from '../../components/input/component';
+import TextComponent from '../../components/text/component';
+import { gray, primary, white } from '../../theme/colors';
+import { text } from '../../theme/size';
+import { spacing } from '../../theme/spacing';
 
 interface InfoBarProps {
   subTitle: string;
@@ -65,7 +65,6 @@ const InfoBar = ({subTitle, title}: InfoBarProps) => (
 const styles = StyleSheet.create({
   container: {
     backgroundColor: primary[900],
-    flex: 0.27,
     paddingHorizontal: spacing[20],
     justifyContent: 'space-between',
     paddingBottom: spacing[20],
