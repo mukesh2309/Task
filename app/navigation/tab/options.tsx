@@ -1,40 +1,47 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { gray, primary, white } from '../../theme/colors';
-import { font } from '../../theme/fonts';
-import { text } from '../../theme/size';
-import { spacing } from '../../theme/spacing';
+import {black, gray, primary, secondary, white} from '../../theme/colors';
+import {font} from '../../theme/fonts';
+import {text} from '../../theme/size';
+import {spacing} from '../../theme/spacing';
 
 const tabBarOptions = (lable: string, focused: boolean) => {
   switch (lable) {
     case 'Home':
-      return <AntDesign name="home" size={spacing[22]} color={primary[800]} />;
+      const Icon = !focused ? AntDesign : Entypo;
+      return (
+        <Icon
+          name="home"
+          size={spacing[24]}
+          color={!focused ? black[600] : secondary[700]}
+        />
+      );
     case 'Categories':
       return (
         <MaterialCommunityIcons
           name="dots-grid"
-          size={spacing[22]}
-          color={primary[800]}
+          size={spacing[24]}
+          color={!focused ? black[600] : secondary[700]}
         />
       );
     case 'Favorite':
       return (
         <MaterialIcons
-          name="favorite-border"
-          size={spacing[22]}
-          color={primary[800]}
+          name={!focused ? 'favorite-border' : 'favorite'}
+          color={!focused ? black[600] : secondary[700]}
+          size={spacing[24]}
         />
       );
     case 'More':
       return (
         <Entypo
           name="dots-three-vertical"
-          size={spacing[20]}
-          color={primary[800]}
+          size={spacing[22]}
+          color={!focused ? black[600] : secondary[700]}
         />
       );
   }
@@ -47,7 +54,7 @@ const styles = StyleSheet.create({
     borderRadius: spacing[30],
     paddingHorizontal: spacing[20],
     height: spacing.value(90),
-    // paddingVertical: spacing[20],
+
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -62,8 +69,13 @@ const styles = StyleSheet.create({
     flex: 1 / 4,
     alignItems: 'center',
   },
+  tabText: {
+    color: gray[500],
+    fontSize: text.base,
+    fontFamily: font.Medium,
+  },
   activeStyle: {
-    backgroundColor: 'yellow',
+    backgroundColor: black[900],
     borderRadius: spacing.value(100),
     alignItems: 'center',
     justifyContent: 'center',
@@ -118,16 +130,7 @@ export const MyTabBar = ({state, descriptors, navigation}) => {
             onLongPress={onLongPress}
             style={[styles.tab, isFocused && styles.activeStyle]}>
             {tabBarOptions(label, isFocused)}
-            {!isFocused ? (
-              <Text
-                style={{
-                  color: gray[500],
-                  fontSize: text.base,
-                  fontFamily: font.Medium,
-                }}>
-                {label}
-              </Text>
-            ) : null}
+            {!isFocused ? <Text style={[styles.tabText]}>{label}</Text> : null}
           </Pressable>
         );
       })}
