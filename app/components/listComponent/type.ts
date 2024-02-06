@@ -9,4 +9,5 @@ export interface listcomponent {
   onEndReached: (e: any) => any;
   overScrollMode: 'auto' | 'always' | 'never';
   numColumns: number;
+  onScroll : (e: any) => any;
 }

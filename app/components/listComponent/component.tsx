@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { FlatList } from 'react-native';
 import { listcomponent } from './type';
-import { spacing } from '../../theme/spacing';
 
 
 const ListComponent = ({
@@ -10,6 +9,7 @@ const ListComponent = ({
   onEndReached,
   overScrollMode = 'always',
   numColumns = 1,
+  onScroll
 }: listcomponent) => {
 
   return (
@@ -17,6 +17,7 @@ const ListComponent = ({
       columnWrapperStyle={{justifyContent: 'space-between'}}
       overScrollMode={overScrollMode}
       data={data}
+      onScroll={onScroll}
       showsVerticalScrollIndicator={false}
       numColumns={numColumns}
       renderItem={renderItem}

@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingBottom: spacing[20],
     paddingTop: spacing[8],
+    // height :spacing.value(220)
   },
   input: {
     marginVertical: spacing[30],
