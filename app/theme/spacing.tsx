@@ -4,6 +4,7 @@ import { getDimensions } from '../utils/constants';
 export const spacing = {
   1: getDimensions(1),
   4: getDimensions(4),
+  6: getDimensions(6),
   8: getDimensions(8),
   10: getDimensions(10),
   12: getDimensions(12),

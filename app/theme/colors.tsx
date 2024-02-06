@@ -7,6 +7,10 @@ export const white = {
   900: '#fff',
 };
 
+export const red = {
+  800 : '#FF8181'
+}
+
 export const secondary = {
   900: '#F9B023',
   800: '#FFC83A',
@@ -27,4 +31,5 @@ export const black = {
   900: '#1E222B',
   600: '#3E4554',
   500: '#616A7D',
+  400 : '#323743'
 };

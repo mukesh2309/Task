@@ -1,11 +1,12 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
-import {spacing} from '../../theme/spacing';
-import TextComponent from '../text/component';
-import {black, gray} from '../../theme/colors';
-import {text} from '../../theme/size';
-import CartBtn from '../cartBtn/component';
+import { Image, StyleSheet, View } from 'react-native';
+import { black, gray } from '../../theme/colors';
+import { text } from '../../theme/size';
+import { spacing } from '../../theme/spacing';
 import { trunCateStringWith3Dots } from '../../utils/truncateWithThreeDots';
+import CartBtn from '../cartBtn/component';
+import LikeBtn from '../like/component';
+import TextComponent from '../text/component';
 
 interface IProductsProps {
   image: string;
@@ -17,12 +18,13 @@ interface IProductsProps {
 const ProductComponent = ({image, key, price, title}: IProductsProps) => {
   return (
     <View key={key} style={styles.container}>
+      <LikeBtn/>
       <Image style={styles.image} source={{uri: image}} />
       <View style={styles.productPrice}>
         <View>
           <TextComponent color={black[900]}>{price}</TextComponent>
           <TextComponent size={text.base} color={black[500]}>
-            {trunCateStringWith3Dots(title,16)}
+            {trunCateStringWith3Dots(title, 16)}
           </TextComponent>
         </View>
         <CartBtn />

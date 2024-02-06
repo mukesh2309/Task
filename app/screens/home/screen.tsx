@@ -1,16 +1,16 @@
-import React, {useEffect, useRef} from 'react';
-import Wrapper from '../../components/wrapper /component';
-import {black, primary} from '../../theme/colors';
-import HomeView from '../../views/home/view';
-import TextComponent from '../../components/text/component';
-import {text} from '../../theme/size';
-import {Animated, ScrollView, StyleSheet, View} from 'react-native';
-import {spacing} from '../../theme/spacing';
-import ProductComponent from '../../components/product/component';
+import React, { useEffect, useRef } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import ListComponent from '../../components/listComponent/component';
+import ProductComponent from '../../components/product/component';
+import TextComponent from '../../components/text/component';
+import Wrapper from '../../components/wrapper /component';
 import ProductsService from '../../services/product/service';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../store/provider';
+import { RootState } from '../../store/provider';
+import { black, primary } from '../../theme/colors';
+import { text } from '../../theme/size';
+import { spacing } from '../../theme/spacing';
+import HomeView from '../../views/home/view';
 
 const HomeScreen = () => {
   const productSvc = new ProductsService('products');
