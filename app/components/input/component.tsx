@@ -1,7 +1,7 @@
 import React from 'react';
-import {Pressable, TextInput, View} from 'react-native';
-import {getStyles} from './style';
-import { primary } from '../../theme/colors';
+import { TextInput, View } from 'react-native';
+import { gray } from '../../theme/colors';
+import { getStyles } from './style';
 
 interface InputProps {
   value: string;
@@ -11,20 +11,22 @@ interface InputProps {
   editAble: boolean;
   multiline: number;
   icon?: JSX.Element | null;
+  style?: object;
 }
 
 const InputComponent = ({
   value,
   onChange,
   placeholder,
-  placeholderTextColor = primary[300],
+  placeholderTextColor = gray[500],
   editAble,
   multiline,
   icon,
+  style
 }: InputProps) => {
   const styles = getStyles({});
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,style]}>
       {icon || null}
       <TextInput
         value={value}
