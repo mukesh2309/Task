@@ -12,8 +12,8 @@ export const getStyles = (props: any) =>
       columnGap: spacing[4],
       backgroundColor : primary[800],
       borderRadius : props.borderRadius || spacing[26],
-      paddingVertical : props.paddingVertical || Platform.OS === 'android' ? spacing[4] : spacing[20],
-      paddingHorizontal : props.paddingHorizontal || spacing[18],
+      paddingVertical : props.paddingVertical || Platform.OS === 'android' ? 0 : spacing[20],
+      paddingHorizontal : props.paddingHorizontal || spacing[22],
     },
     input: {
       alignItems : 'center',

@@ -12,6 +12,7 @@ interface InputProps {
   multiline: number;
   icon?: JSX.Element | null;
   style?: object;
+  color?: string;
 }
 
 const InputComponent = ({
@@ -22,9 +23,10 @@ const InputComponent = ({
   editAble,
   multiline,
   icon,
-  style
+  style,
+  color = gray[500],
 }: InputProps) => {
-  const styles = getStyles({});
+  const styles = getStyles({color});
   return (
     <View style={[styles.container,style]}>
       {icon || null}
@@ -37,6 +39,7 @@ const InputComponent = ({
         editable={editAble}
         multiline={multiline}
         style={styles.input}
+
       />
     </View>
   );
