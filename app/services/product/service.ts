@@ -24,12 +24,13 @@ export default class ProductsService {
     }
   }
 
-  async getProduct(input: number) {
+  async getProduct(id: number) {
     try {
-      const url = `${this.baseUrl}/${input}?_=${Date.now()}`;
+      const url = `${this.baseUrl}/${id}?_=${Date.now()}`;
       const res = await fetch(url);
       if (res.ok) {
         const data = await res.json();
+        console.log('data',data)
         store.dispatch(setProduct(data));
         return data;
       }

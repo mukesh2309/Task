@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Svg, { Defs, LinearGradient, Path, Stop } from 'react-native-svg';
-import TextComponent from '../text/component';
 import { black } from '../../theme/colors';
-import { text } from '../../theme/size';
 import { spacing } from '../../theme/spacing';
+import TextComponent from '../text/component';
 
 const StarIcon = ({ filled, halfFilled }: any) => {
   let fillColor = 'transparent';
@@ -30,11 +29,11 @@ const StarIcon = ({ filled, halfFilled }: any) => {
   );
 };
 
-interface StarsProps {
+interface RatingProps {
   rating: number;
   review?: number;
 }
-const Stars = ({ rating, review }: StarsProps) => {
+const Rating = ({ rating, review }: RatingProps) => {
   const renderStars = () => {
     const stars = [];
     const filledStars = Math.floor(rating);
@@ -73,4 +72,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Stars;
+export default Rating;

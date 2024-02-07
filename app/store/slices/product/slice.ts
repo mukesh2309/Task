@@ -1,15 +1,17 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 export interface IProduct {
-  data: Array<any>;
-  loading: boolean;
-  hasMore: boolean;
+  data: {
+    products: any;
+    loading: boolean;
+  };
 }
 
 const initialState: IProduct = {
-  data: [],
-  loading: true,
-  hasMore: true,
+  data: {
+    loading: true,
+    products: [],
+  },
 };
 
 const productSlice = createSlice({
@@ -17,15 +19,20 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     setProducts: (state, action) => {
-      state.data = action.payload;
-      state.loading = false
+      state.data = {
+        ...action.payload,
+        loading: false,
+      };
     },
     setProduct: (state, action) => {
-      state.data = action.payload;
+      state.data.products = state.data.products.map((product:any) =>
+        product.id === action.payload.id ? { ...product, ...action.payload } : product
+      );
     },
+    
   },
 });
 
-export const { setProduct, setProducts} = productSlice.actions;
+export const {setProduct, setProducts} = productSlice.actions;
 
 export default productSlice.reducer;

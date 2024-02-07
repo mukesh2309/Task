@@ -1,15 +1,18 @@
-import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import ProductsService from '../../services/product/service';
+import { RootState } from '../../store/provider';
+import { font } from '../../theme/fonts';
+import { spacing } from '../../theme/spacing';
 import Wrapper from '../../components/wrapper /component';
-import {black, primary} from '../../theme/colors';
 import Cart from '../../components/cart/component';
-import {FlatList, Image, StyleSheet, View} from 'react-native';
-import TextComponent from '../../components/text/component';
-import {text} from '../../theme/size';
-import {font} from '../../theme/fonts';
-import {spacing} from '../../theme/spacing';
+import { black, primary } from '../../theme/colors';
+import { text } from '../../theme/size';
 import Rating from '../../components/rating/component';
+import TextComponent from '../../components/text/component';
 import Swiper from '../../components/swiper/component';
-import {useNavigation} from '@react-navigation/native';
 
 interface ProductScreenProps {
   route: {
@@ -20,6 +23,17 @@ interface ProductScreenProps {
 }
 const ProductScreen = ({route}: ProductScreenProps) => {
   const navigation = useNavigation();
+  const id = route.params.id;
+  const productSvc = new ProductsService('products');
+  const productsObj = useSelector((state: RootState) => state.products.data);
+  const [loading, setLoading] = React.useState(true);
+  const product = productsObj.products.find((item:any) => item.id === id);
+
+  useEffect(() => {
+    setLoading(true);
+    productSvc.getProduct(id).finally(() => setLoading(false));
+  }, []);
+
   return (
     <Wrapper
       isLoading={false}
@@ -40,15 +54,18 @@ const ProductScreen = ({route}: ProductScreenProps) => {
           color={black[900]}
           font={font.Regular}
           size={text.value(40)}>
-          Thin Choise
+            {product?.brand}
         </TextComponent>
         <TextComponent
           style={styles.title}
           color={black[900]}
           size={text.value(50)}>
-          Top Orange
+          {product?.title}
         </TextComponent>
-        <Rating rating={4.5} review={133} />
+        <Rating rating={product.rating} review={133} />
+        <Swiper
+        images={product?.images}
+        />
       </View>
     </Wrapper>
   );

@@ -14,7 +14,9 @@ import HomeView from '../../views/home/view';
 
 const HomeScreen = ({navigation}: any) => {
   const productSvc = new ProductsService('products');
-  const productsObj: any = useSelector((state: RootState) => state.products);
+  const productsObj = useSelector((state: RootState) => state.products.data);
+
+  console.log(productsObj);
 
   useEffect(() => {
     productSvc.getProducts();
@@ -54,7 +56,7 @@ const HomeScreen = ({navigation}: any) => {
               </TextComponent>
             </View>
           }
-          data={productsObj.data.products}
+          data={productsObj.products}
           numColumns={2}
           onEndReached={() => console.log('hi')}
           renderItem={({item, index}: any) => (
