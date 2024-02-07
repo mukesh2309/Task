@@ -6,6 +6,8 @@ import TextComponent from '../../components/text/component';
 import Wrapper from '../../components/wrapper /component';
 import { black, gray, white } from '../../theme/colors';
 import { spacing } from '../../theme/spacing';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/provider';
 
 interface list {
   id: number;
@@ -14,6 +16,8 @@ interface list {
   img: string;
 }
 const CartScreen = () => {
+
+  const cart = useSelector((state: RootState) => state.products.cart);
   return (
     <Wrapper
       isLoading={false}
@@ -27,9 +31,11 @@ const CartScreen = () => {
       }}>
       <View style={styles.flatList}>
         <FlatList
-          data={[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 22, 2]}
+          data={cart}
           renderItem={({item, index}: any) => (
-            <ItemComponent id={0} name={''} price={0} img={''} />
+            <ItemComponent
+            qty={item?.quantity}
+            id={item?.id} name={item?.title} price={item?.price} img={item?.images?.[0]} />
           )}
         />
       </View>

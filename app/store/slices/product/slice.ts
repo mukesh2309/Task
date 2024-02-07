@@ -78,6 +78,24 @@ const productSlice = createSlice({
         likedProduct.isLiked = false;
       }
     },
+    addQuantity: (state, action) => {
+      const {id} = action.payload;
+      const Product = state.cart.find(
+        (product: any) => product.id === id,
+      );
+      if (Product) {
+        Product.quantity += 1;
+      }
+    },
+    removeQuantity: (state, action) => {
+      const {id} = action.payload;
+      const Product = state.cart.find(
+        (product: any) => product.id === id,
+      );
+      if (Product) {
+        Product.quantity -= 1;
+      }
+    },
   },
 });
 

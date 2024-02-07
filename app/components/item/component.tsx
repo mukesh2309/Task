@@ -7,15 +7,17 @@ import {text} from '../../theme/size';
 import {spacing} from '../../theme/spacing';
 import PriceComponent from '../price/component';
 import TextComponent from '../text/component';
+import { trunCateStringWith3Dots } from '../../utils/truncateWithThreeDots';
 
 interface ItemComponent {
   id: number;
   name: string;
   price: number;
   img: string;
+  qty : number
 }
-const ItemComponent = ({id, name, price, img}: ItemComponent) => {
-  const [count, setCount] = React.useState(0);
+const ItemComponent = ({id, name, price, img,qty}: ItemComponent) => {
+  const [count, setCount] = React.useState(qty);
 
   const handleInc = () => {
     setCount(count + 1);
@@ -31,13 +33,12 @@ const ItemComponent = ({id, name, price, img}: ItemComponent) => {
         <Image source={{uri: img}} style={styles.img} />
         <View>
           <TextComponent
-            size={text.value(18)}
-            font={font.Regular}
+            size={text.value(15)}
             color={black[900]}>
-            {name}
+            {trunCateStringWith3Dots(name,18)}
           </TextComponent>
           <PriceComponent
-            size={text.value(16)}
+            size={text.value(15)}
             price={price}
             color={black[900]}
           />
