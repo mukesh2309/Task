@@ -16,12 +16,22 @@ interface WrapperProps {
   statusbar?: IStatusBar;
   isAppBar?: boolean;
   isLoading?: boolean;
+  appBar: {
+    title: string;
+    rightIcon: JSX.Element | null;
+    leftIcon: JSX.Element | null;
+  };
 }
 
 const Wrapper = ({
   children,
   style,
   isAppBar = false,
+  appBar = {
+    title: '',
+    rightIcon: null,
+    leftIcon: null,
+  },
   isLoading = false,
   statusbar = {
     backgroundColor: '#fff',
@@ -31,7 +41,13 @@ const Wrapper = ({
   useStatusBar(statusbar.barStyle, statusbar.backgroundColor);
   return (
     <SafeAreaView style={[styles.container, style]}>
-      {isAppBar && <AppBar />}
+      {isAppBar && (
+        <AppBar
+          title={appBar.title}
+          leftIcon={appBar.leftIcon}
+          rightIcon={appBar.rightIcon}
+        />
+      )}
       {isLoading ? <LoadingComponent /> : null}
       {children}
     </SafeAreaView>

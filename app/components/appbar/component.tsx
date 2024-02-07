@@ -1,25 +1,36 @@
 import React from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {primary} from '../../theme/colors';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {gray, primary} from '../../theme/colors';
+import {font} from '../../theme/fonts';
+import {text} from '../../theme/size';
 import {spacing} from '../../theme/spacing';
 import TextComponent from '../text/component';
 
 interface AppBarProps {
   title: string;
-  rightIcon?: JSX.Element;
-  leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element | any;
+  leftIcon?: JSX.Element | any;
 }
 
 const AppBar = ({title, rightIcon, leftIcon}: AppBarProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.flexRow}>
-        <Pressable style={styles.backBtn}>
-          <Ionicons size={spacing[18]} name="arrow-back" color={primary[900]} />
-        </Pressable>
-        <TextComponent>Title</TextComponent>
+        {leftIcon || (
+          <Pressable style={styles.backBtn}>
+            <MaterialIcons
+              size={spacing[28]}
+              name="chevron-left"
+              color={primary[900]}
+            />
+          </Pressable>
+        )}
+        <TextComponent size={text.medium} style={styles.title}>
+          {title}
+        </TextComponent>
       </View>
+      {rightIcon}
     </View>
   );
 };
@@ -28,15 +39,25 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: spacing[16],
+    paddingHorizontal: spacing[16],
+    paddingVertical: spacing[10],
     backgroundColor: 'red',
   },
   backBtn: {
-    padding: spacing[8],
+    height: spacing[38],
+    width: spacing[38],
+    borderRadius: spacing.value(100),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: gray[100],
   },
   flexRow: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  title: {
+    fontFamily: font.Regular,
+    marginLeft: spacing[14],
   },
 });
 
