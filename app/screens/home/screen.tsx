@@ -45,7 +45,6 @@ const HomeScreen = ({navigation}: any) => {
                 user={{
                   name: 'Hey, Rahul',
                 }}
-                onSearch={() => console.log('search')}
                 address={{
                   subTitle: 'DELIVERY TO',
                   title: 'Green Way 3000, Sylhet',

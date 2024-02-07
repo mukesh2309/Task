@@ -23,7 +23,6 @@ interface list {
 const CartScreen = () => {
   const cart = useSelector((state: RootState) => state.products.cart);
   const total = useSelector((state: RootState) => state.products.total);
-  console.log('total', total);
   const cartCount = cart?.length?.toString();
   const dispatch = useDispatch();
 
