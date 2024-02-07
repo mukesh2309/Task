@@ -1,12 +1,11 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import Button from '../../components/button/component';
 import ItemComponent from '../../components/item/component';
-import Wrapper from '../../components/wrapper /component';
-import {black, gray, white} from '../../theme/colors';
-import {spacing} from '../../theme/spacing';
 import TextComponent from '../../components/text/component';
-import { font } from '../../theme/fonts';
+import Wrapper from '../../components/wrapper /component';
+import { black, gray, white } from '../../theme/colors';
+import { spacing } from '../../theme/spacing';
 
 interface list {
   id: number;

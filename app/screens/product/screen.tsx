@@ -1,7 +1,7 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
 import Button from '../../components/button/component';
 import Cart from '../../components/cart/component';
 import PriceComponent from '../../components/price/component';
@@ -10,12 +10,12 @@ import Swiper from '../../components/swiper/component';
 import TextComponent from '../../components/text/component';
 import Wrapper from '../../components/wrapper /component';
 import ProductsService from '../../services/product/service';
-import { RootState } from '../../store/provider';
-import { black, white } from '../../theme/colors';
-import { font } from '../../theme/fonts';
-import { text } from '../../theme/size';
-import { spacing } from '../../theme/spacing';
-import { trunCateStringWith3Dots } from '../../utils/truncateWithThreeDots';
+import {RootState} from '../../store/provider';
+import {black, white} from '../../theme/colors';
+import {font} from '../../theme/fonts';
+import {text} from '../../theme/size';
+import {spacing} from '../../theme/spacing';
+import {trunCateStringWith3Dots} from '../../utils/truncateWithThreeDots';
 
 interface ProductScreenProps {
   route: {
@@ -31,6 +31,8 @@ const ProductScreen = ({route}: ProductScreenProps) => {
   const productsObj = useSelector((state: RootState) => state.products.data);
   const [loading, setLoading] = React.useState(true);
   const product = productsObj.products.find((item: any) => item.id === id);
+  const cart = useSelector((state: RootState) => state.products.cart);
+  const cartCount = cart?.length.toString() || '0';
 
   useEffect(() => {
     setLoading(true);
@@ -45,7 +47,7 @@ const ProductScreen = ({route}: ProductScreenProps) => {
       appBar={{
         rightIcon: (
           <Cart
-            count={10}
+            count={cartCount}
             onPress={() => {
               navigation.navigate('CartScreen');
             }}
@@ -78,29 +80,28 @@ const ProductScreen = ({route}: ProductScreenProps) => {
         />
       </View>
       <View style={styles.btnContainer}>
+        <Button type="outlined" name="Add to Cart" onPress={() => {}} />
         <Button
-          type="outlined"
-          name="Add to Cart"
-          onPress={() => {}}
+          name="Buy Now"
+          onPress={() => {
+            navigation.navigate('CartScreen');
+          }}
         />
-        <Button name="Buy Now" onPress={() => {
-          navigation.navigate('CartScreen');
-        }} />
       </View>
-        <View style={styles.description}>
-          <TextComponent
-            color={black[900]}
-            font={font.Regular}
-            size={text.value(20)}>
-            Details
-          </TextComponent>
-          <TextComponent
-            color={black[100]}
-            font={font.Regular}
-            size={text.value(14)}>
-            {product?.description}
-          </TextComponent>
-        </View>
+      <View style={styles.description}>
+        <TextComponent
+          color={black[900]}
+          font={font.Regular}
+          size={text.value(20)}>
+          Details
+        </TextComponent>
+        <TextComponent
+          color={black[100]}
+          font={font.Regular}
+          size={text.value(14)}>
+          {product?.description}
+        </TextComponent>
+      </View>
     </Wrapper>
   );
 };

@@ -14,9 +14,10 @@ interface IProductsProps {
   price: string;
   title: string;
   onPress : () => void;
+  onCartPress : (e:any) => void;
 }
 
-const ProductComponent = ({image, key, price, title,onPress}: IProductsProps) => {
+const ProductComponent = ({image, key, price, title,onPress,onCartPress}: IProductsProps) => {
   return (
     <Pressable onPress={onPress} key={key} style={styles.container}>
       <LikeBtn/>
@@ -28,7 +29,7 @@ const ProductComponent = ({image, key, price, title,onPress}: IProductsProps) =>
             {trunCateStringWith3Dots(title, 16)}
           </TextComponent>
         </View>
-        <CartBtn />
+        <CartBtn onPress={onCartPress} />
       </View>
     </Pressable>
   );
