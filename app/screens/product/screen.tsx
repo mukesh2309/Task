@@ -34,7 +34,7 @@ const ProductScreen = ({route}: ProductScreenProps) => {
 
   useEffect(() => {
     setLoading(true);
-    // productSvc.getProduct(id).finally(() => setLoading(false));
+    productSvc.getProduct(id).finally(() => setLoading(false));
   }, []);
 
   return (
