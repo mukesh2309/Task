@@ -74,7 +74,7 @@ const ProductScreen = ({route}: ProductScreenProps) => {
           size={text.value(35)}>
           {trunCateStringWith3Dots(product?.title, 20)}
         </TextComponent>
-        <Rating rating={product.rating} review={133} />
+        <Rating rating={product?.rating} review={133} />
       </View>
       <Swiper
         id={product?.id}

@@ -8,7 +8,11 @@ import {black, gray, white} from '../../theme/colors';
 import {spacing} from '../../theme/spacing';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/provider';
-import {addQuantity, removeQuantity} from '../../store/slices/product/slice';
+import {
+  addQuantity,
+  removeFromCart,
+  removeQuantity,
+} from '../../store/slices/product/slice';
 
 interface list {
   id: number;
@@ -19,11 +23,9 @@ interface list {
 const CartScreen = () => {
   const cart = useSelector((state: RootState) => state.products.cart);
   const total = useSelector((state: RootState) => state.products.total);
-  console.log('total',total)
+  console.log('total', total);
   const cartCount = cart?.length?.toString();
   const dispatch = useDispatch();
-
-
 
   return (
     <Wrapper
@@ -40,14 +42,17 @@ const CartScreen = () => {
         <FlatList
           data={cart}
           renderItem={({item, index}: any) => {
-            console.log('item', item?.quantity);
             return (
               <ItemComponent
                 incPress={() => {
                   dispatch(addQuantity({id: item?.id}));
                 }}
-                decPress={() => {
-                  dispatch(removeQuantity({id: item?.id}));
+                decPress={e => {
+                  if (e === 1) {
+                    dispatch(removeFromCart({id: item?.id}));
+                  } else {
+                    dispatch(removeQuantity({id: item?.id}));
+                  }
                 }}
                 qty={item?.quantity}
                 id={item?.id}

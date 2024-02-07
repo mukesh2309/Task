@@ -1,10 +1,11 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {black, gray, primary} from '../../theme/colors';
-import {font} from '../../theme/fonts';
-import {text} from '../../theme/size';
-import {spacing} from '../../theme/spacing';
+import { black, gray } from '../../theme/colors';
+import { font } from '../../theme/fonts';
+import { text } from '../../theme/size';
+import { spacing } from '../../theme/spacing';
 import TextComponent from '../text/component';
 
 interface AppBarProps {
@@ -14,11 +15,12 @@ interface AppBarProps {
 }
 
 const AppBar = ({title, rightIcon, leftIcon}: AppBarProps) => {
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
       <View style={styles.flexRow}>
         {leftIcon || (
-          <Pressable style={styles.backBtn}>
+          <Pressable onPress={()=>navigation.goBack()} style={styles.backBtn}>
             <MaterialIcons
               size={spacing[28]}
               name="chevron-left"

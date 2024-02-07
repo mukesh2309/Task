@@ -15,20 +15,20 @@ interface ItemComponent {
   price: number;
   img: string;
   qty : number;
-  incPress: ()=>void;
-  decPress: ()=>void;
+  incPress: (e:number)=>void;
+  decPress: (e:number)=>void;
 }
 const ItemComponent = ({id, name, price, img,qty,incPress,decPress}: ItemComponent) => {
   const [count, setCount] = React.useState(qty);
 
   const handleInc = () => {
     setCount(count + 1);
-    incPress();
+    incPress(count);
   };
   const handleDec = () => {
     if (count > 0) {
       setCount(count - 1);
-      decPress()
+      decPress(count)
     }
   };
   return (
