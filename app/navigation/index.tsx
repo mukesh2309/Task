@@ -17,7 +17,6 @@ const AppStack = createStackNavigator<SuperRootStackParamList>();
 const AppStackNavigation = () => {
   const navigationOptions: StackNavigationOptions = {
     headerShown: false,
-    gestureEnabled: true,
     animationEnabled : false,
   };
 

@@ -2,12 +2,14 @@ import React from 'react';
 import Wrapper from '../../components/wrapper /component';
 import {black, primary} from '../../theme/colors';
 import Cart from '../../components/cart/component';
-import {StyleSheet, View} from 'react-native';
+import {FlatList, Image, StyleSheet, View} from 'react-native';
 import TextComponent from '../../components/text/component';
 import {text} from '../../theme/size';
 import {font} from '../../theme/fonts';
 import {spacing} from '../../theme/spacing';
 import Rating from '../../components/rating/component';
+import Swiper from '../../components/swiper/component';
+import {useNavigation} from '@react-navigation/native';
 
 interface ProductScreenProps {
   route: {
@@ -17,6 +19,7 @@ interface ProductScreenProps {
   };
 }
 const ProductScreen = ({route}: ProductScreenProps) => {
+  const navigation = useNavigation();
   return (
     <Wrapper
       isLoading={false}
@@ -26,7 +29,7 @@ const ProductScreen = ({route}: ProductScreenProps) => {
           <Cart
             count={10}
             onPress={() => {
-              console.log('cart');
+              navigation.navigate('CartScreen');
             }}
           />
         ),
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
     fontFamily: font.ExtraBold,
   },
   header: {
-    flex: 1,
+    // flex: 1,
     // backgroundColor: 'red',
     paddingHorizontal: spacing[20],
   },
