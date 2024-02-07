@@ -35,7 +35,7 @@ const ProductComponent = ({
       <Image style={styles.image} source={{uri: image}} />
       <View style={styles.productPrice}>
         <View>
-          <TextComponent color={black[900]}>{price}</TextComponent>
+          <TextComponent color={black[900]}>{`$${price}`}</TextComponent>
           <TextComponent size={text.base} color={black[500]}>
             {trunCateStringWith3Dots(title, 16)}
           </TextComponent>

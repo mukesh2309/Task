@@ -6,6 +6,7 @@ export interface IProduct {
     loading: boolean;
   };
   cart: [];
+  total : number
 }
 
 const initialState: IProduct = {
@@ -14,6 +15,7 @@ const initialState: IProduct = {
     products: [],
   },
   cart: [],
+  total : 0
 };
 
 const productSlice = createSlice({
@@ -46,6 +48,7 @@ const productSlice = createSlice({
       );
       if (product) {
         const cartItem = state.cart.find((item: any) => item.id === id);
+        state.total += product.price
         if (cartItem) {
           cartItem.quantity += quantity;
         } else {
@@ -56,7 +59,9 @@ const productSlice = createSlice({
     removeFromCart: (state, action) => {
       const {id} = action.payload;
       const index = state.cart.findIndex((item: any) => item.id === id);
+      const product =  state.cart[index]
       if (index !== -1) {
+        state.total -= product.price
         state.cart.splice(index, 1);
       }
     },
@@ -80,21 +85,19 @@ const productSlice = createSlice({
     },
     addQuantity: (state, action) => {
       const {id} = action.payload;
-      const Product = state.cart.find(
-        (product: any) => product.id === id,
-      );
-      if (Product) {
-        Product.quantity += 1;
-      }
+      const product = state.cart.find((product: any) => product.id === id);
+      const qty = product?.quantity || 0
+      state.total += product.price;
+      const productIndex = state.cart.findIndex((product: any) => product.id === id);
+      state.cart[productIndex] = {...product, quantity: qty+1};
     },
     removeQuantity: (state, action) => {
       const {id} = action.payload;
-      const Product = state.cart.find(
-        (product: any) => product.id === id,
-      );
-      if (Product) {
-        Product.quantity -= 1;
-      }
+      const product = state.cart.find((product: any) => product.id === id);
+      state.total -= product.price;
+      const qty = product?.quantity || 0
+      const productIndex = state.cart.findIndex((product: any) => product.id === id);
+      state.cart[productIndex] = {...product, quantity: qty-1};
     },
   },
 });
@@ -106,6 +109,8 @@ export const {
   removeFromCart,
   addToLike,
   removeFromLike,
+  addQuantity,
+  removeQuantity
 } = productSlice.actions;
 
 export default productSlice.reducer;
