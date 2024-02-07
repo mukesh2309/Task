@@ -54,10 +54,24 @@ const productSlice = createSlice({
         state.cart.splice(index, 1);
       }
     },
+    addToLike: (state, action) => {
+      const { id } = action.payload;
+      const likedProduct = state.data.products.find((product: any) => product.id === id);
+      if (likedProduct) {
+        likedProduct.isLiked = true;
+      }
+    },
+    removeFromLike: (state, action) => {
+      const { id } = action.payload;
+      const likedProduct = state.data.products.find((product: any) => product.id === id);
+      if (likedProduct) {
+        likedProduct.isLiked = false;
+      }
+    },
   },
 });
 
-export const {setProduct, setProducts, addToCart, removeFromCart} =
+export const {setProduct, setProducts, addToCart, removeFromCart,addToLike,removeFromLike} =
   productSlice.actions;
 
 export default productSlice.reducer;

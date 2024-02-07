@@ -1,9 +1,9 @@
 import React from 'react';
-import { Image, Pressable, StyleSheet, View } from 'react-native';
-import { black, gray } from '../../theme/colors';
-import { text } from '../../theme/size';
-import { spacing } from '../../theme/spacing';
-import { trunCateStringWith3Dots } from '../../utils/truncateWithThreeDots';
+import {Image, Pressable, StyleSheet, View} from 'react-native';
+import {black, gray} from '../../theme/colors';
+import {text} from '../../theme/size';
+import {spacing} from '../../theme/spacing';
+import {trunCateStringWith3Dots} from '../../utils/truncateWithThreeDots';
 import CartBtn from '../cartBtn/component';
 import LikeBtn from '../like/component';
 import TextComponent from '../text/component';
@@ -13,14 +13,25 @@ interface IProductsProps {
   key: number;
   price: string;
   title: string;
-  onPress : () => void;
-  onCartPress : (e:any) => void;
+  onPress: () => void;
+  onCartPress: (e: any) => void;
+  isLiked: boolean;
+  onLikePress: (e:any) => void;
 }
 
-const ProductComponent = ({image, key, price, title,onPress,onCartPress}: IProductsProps) => {
+const ProductComponent = ({
+  image,
+  key,
+  price,
+  title,
+  onPress,
+  onCartPress,
+  onLikePress,
+  isLiked,
+}: IProductsProps) => {
   return (
     <Pressable onPress={onPress} key={key} style={styles.container}>
-      <LikeBtn/>
+      <LikeBtn onPress={onLikePress} isLiked={isLiked} />
       <Image style={styles.image} source={{uri: image}} />
       <View style={styles.productPrice}>
         <View>

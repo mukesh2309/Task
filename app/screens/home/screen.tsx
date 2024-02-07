@@ -11,16 +11,18 @@ import {black, primary} from '../../theme/colors';
 import {text} from '../../theme/size';
 import {spacing} from '../../theme/spacing';
 import HomeView from '../../views/home/view';
-import {addToCart, removeFromCart} from '../../store/slices/product/slice';
+import {
+  addToCart,
+  addToLike,
+  removeFromCart,
+  removeFromLike,
+} from '../../store/slices/product/slice';
 
 const HomeScreen = ({navigation}: any) => {
   const productSvc = new ProductsService('products');
   const productsObj = useSelector((state: RootState) => state.products.data);
   const cart = useSelector((state: RootState) => state.products.cart);
 
-
-  console.log('cart length', cart.length);
-  
   useEffect(() => {
     productSvc.getProducts();
   }, []);
@@ -65,6 +67,12 @@ const HomeScreen = ({navigation}: any) => {
           numColumns={2}
           renderItem={({item, index}: any) => (
             <ProductComponent
+              onLikePress={e => {
+                !e
+                  ? dispatch(addToLike({id: item?.id}))
+                  : dispatch(removeFromLike({id: item?.id}));
+              }}
+              isLiked={false}
               onCartPress={e => {
                 !e
                   ? dispatch(addToCart({id: item?.id, quantity: 1}))

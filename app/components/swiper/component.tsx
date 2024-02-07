@@ -3,10 +3,16 @@ import {Dimensions, FlatList, Image, StyleSheet, View} from 'react-native';
 import {gray, secondary, white} from '../../theme/colors';
 import {spacing} from '../../theme/spacing';
 import LikeBtn from '../like/component';
+import {useDispatch} from 'react-redux';
+import {addToLike, removeFromLike} from '../../store/slices/product/slice';
 
 const width = Dimensions.get('window').width;
 
-const Swiper = ({images}) => {
+interface SwiperProps {
+  images: [];
+  id: number;
+}
+const Swiper = ({images, id}: SwiperProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const viewableItemsChanged = ({viewableItems}) => {
@@ -20,6 +26,8 @@ const Swiper = ({images}) => {
       <Image source={{uri: item}} style={styles.image} resizeMode="cover" />
     </View>
   );
+
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
@@ -47,9 +55,12 @@ const Swiper = ({images}) => {
       </View>
       <View style={styles.like}>
         <LikeBtn
-        isLiked={false}
+          onPress={e => {
+            !e ? dispatch(addToLike({id})) : dispatch(removeFromLike({id}));
+          }}
+          isLiked={false}
           style={{
-            marginTop : spacing[4],
+            marginTop: spacing[4],
             marginLeft: spacing[4],
           }}
         />
@@ -110,7 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: white[900],
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius : spacing[4]
+    borderRadius: spacing[4],
   },
 });
 
