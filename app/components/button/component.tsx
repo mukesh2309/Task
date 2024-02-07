@@ -2,12 +2,12 @@ import React from 'react';
 import {Pressable, Text, View} from 'react-native';
 import {RectButton} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {main} from '../../theme/color';
 import {spacing} from '../../theme/spacing';
 import {getStyles} from './style';
 import TextComponent from '../text/component';
 import {font} from '../../theme/fonts';
 import {text} from '../../theme/size';
+import { white } from '../../theme/colors';
 
 interface ButtonProps {
   onPress?: () => void;
@@ -42,7 +42,7 @@ const Button = ({
               <AntDesign
                 name="arrowright"
                 size={spacing[20]}
-                color={main.white}
+                color={white[900]}
               />
             }
             style={styles.filled}

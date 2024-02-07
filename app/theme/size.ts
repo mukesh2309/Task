@@ -12,4 +12,5 @@ export const text = {
   xl: getFontSize(22),
   xxl: getFontSize(24),
   x_xs : getFontSize(28),
+  value : (val:any) => getFontSize(val)
 };

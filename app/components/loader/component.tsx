@@ -1,7 +1,7 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
-import {spacing} from '../../theme/spacing';
-import {primary} from '../../theme/colors';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { primary } from '../../theme/colors';
+import { spacing } from '../../theme/spacing';
 
 interface LoadingComponentProps {
   size?: number;
