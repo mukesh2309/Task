@@ -14,7 +14,6 @@ import HomeView from '../../views/home/view';
 
 const HomeScreen = ({navigation}: any) => {
   const productSvc = new ProductsService('products');
-
   const productsObj : any = useSelector((state: RootState) => state.products);
   
 
@@ -59,9 +58,11 @@ const HomeScreen = ({navigation}: any) => {
           data={productsObj.data.products}
           numColumns={2}
           onEndReached={() => console.log('hi')}
-          renderItem={({item, index}) => (
+          renderItem={({item, index}:any) => (
             <ProductComponent
-              onPress={() => navigation.navigate('ProductScreen', item?.id)}
+              onPress={() => navigation.navigate('ProductScreen', {
+                id : item?.id
+              })}
               price={item?.price}
               title={item?.title}
               image={item?.images[0]}

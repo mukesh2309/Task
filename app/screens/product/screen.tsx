@@ -1,12 +1,26 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import Wrapper from '../../components/wrapper /component';
+import { primary } from '../../theme/colors';
 
-const ProductScreen = () => {
-  return (
-    <View>
-      <Text>ProductScreen</Text>
-    </View>
-  )
+interface ProductScreenProps {
+  route: {
+    params: {
+      id: number;
+    };
+  };
 }
+const ProductScreen = ({route}: ProductScreenProps) => {
+  return (
+    <Wrapper
+      isLoading={false}
+      isAppBar={true}
+      statusbar={{
+        backgroundColor: primary[900],
+        barStyle: 'light-content',
+      }}>
 
-export default ProductScreen
+      </Wrapper>
+  );
+};
+
+export default ProductScreen;
