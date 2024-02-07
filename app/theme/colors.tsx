@@ -5,6 +5,7 @@ export const primary = {
 
 export const white = {
   900: '#fff',
+  800: '#F8F7FB',
 };
 
 export const red = {
@@ -31,5 +32,5 @@ export const black = {
   900: '#1E222B',
   600: '#3E4554',
   500: '#616A7D',
-  400 : '#323743'
+  400 : '#323743',
 };

@@ -4,6 +4,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../appbar/component';
 import {useStatusBar} from '../../utils/statusBar';
 import LoadingComponent from '../loader/component';
+import { white } from '../../theme/colors';
 
 interface IStatusBar {
   backgroundColor: string;
@@ -17,9 +18,9 @@ interface WrapperProps {
   isAppBar?: boolean;
   isLoading?: boolean;
   appBar: {
-    title: string;
-    rightIcon: JSX.Element | null;
-    leftIcon: JSX.Element | null;
+    title?: string;
+    rightIcon?: JSX.Element | null;
+    leftIcon?: JSX.Element | null;
   };
 }
 
@@ -57,7 +58,7 @@ const Wrapper = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: white[900]
   },
 });
 export default Wrapper;

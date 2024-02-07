@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: spacing[16],
     paddingVertical: spacing[10],
-    backgroundColor: 'red',
+    height : spacing.value(60)
   },
   backBtn: {
-    height: spacing[38],
-    width: spacing[38],
+    height: spacing[40],
+    width: spacing[40],
     borderRadius: spacing.value(100),
     alignItems: 'center',
     justifyContent: 'center',
