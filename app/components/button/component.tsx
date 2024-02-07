@@ -7,7 +7,7 @@ import {getStyles} from './style';
 import TextComponent from '../text/component';
 import {font} from '../../theme/fonts';
 import {text} from '../../theme/size';
-import { white } from '../../theme/colors';
+import {white} from '../../theme/colors';
 
 interface ButtonProps {
   onPress?: () => void;
@@ -31,39 +31,17 @@ const Button = ({
   const styles = getStyles(type);
   return (
     <React.Fragment>
-      {type === 'filled' ? (
-        <RectButton
-          style={[styles.button, style]}
-          enabled={!disabled}
-          onPress={onPress}>
-          <Content
-            textstyle={textstyle}
-            icon={
-              <AntDesign
-                name="arrowright"
-                size={spacing[20]}
-                color={white[900]}
-              />
-            }
-            style={styles.filled}
-            name={name}
-            type={type}
-          />
-        </RectButton>
-      ) : (
-        <Pressable
-          style={[styles.button, style]}
-          disabled={disabled}
-          onPress={onPress}>
-          <Content
-            style={styles.outlined}
-            textstyle={textstyle}
-            icon={icon}
-            name={name}
-            type={type}
-          />
-        </Pressable>
-      )}
+      <Pressable
+        style={[styles.button, style]}
+        disabled={disabled}
+        onPress={onPress}>
+        <Content
+          textstyle={textstyle}
+          style={styles.filled}
+          name={name}
+          type={type}
+        />
+      </Pressable>
     </React.Fragment>
   );
 };

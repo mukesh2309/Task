@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../appbar/component';
 import {useStatusBar} from '../../utils/statusBar';
 import LoadingComponent from '../loader/component';
-import { white } from '../../theme/colors';
+import {white} from '../../theme/colors';
 
 interface IStatusBar {
   backgroundColor: string;
@@ -22,6 +22,7 @@ interface WrapperProps {
     rightIcon?: JSX.Element | null;
     leftIcon?: JSX.Element | null;
   };
+  type?: 'safearea' | 'scroll';
 }
 
 const Wrapper = ({
@@ -33,6 +34,7 @@ const Wrapper = ({
     rightIcon: null,
     leftIcon: null,
   },
+  type = 'safearea',
   isLoading = false,
   statusbar = {
     backgroundColor: '#fff',
@@ -40,8 +42,10 @@ const Wrapper = ({
   },
 }: WrapperProps) => {
   useStatusBar(statusbar.barStyle, statusbar.backgroundColor);
+
+  const Wrapper = type === 'scroll' ? ScrollView : SafeAreaView;
   return (
-    <SafeAreaView style={[styles.container, style]}>
+    <Wrapper style={[styles.container, style]}>
       {isAppBar && (
         <AppBar
           title={appBar.title}
@@ -51,14 +55,14 @@ const Wrapper = ({
       )}
       {isLoading ? <LoadingComponent /> : null}
       {children}
-    </SafeAreaView>
+    </Wrapper>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: white[900]
+    backgroundColor: white[900],
   },
 });
 export default Wrapper;

@@ -16,8 +16,6 @@ const HomeScreen = ({navigation}: any) => {
   const productSvc = new ProductsService('products');
   const productsObj = useSelector((state: RootState) => state.products.data);
 
-  console.log(productsObj);
-
   useEffect(() => {
     productSvc.getProducts();
   }, []);
@@ -58,7 +56,6 @@ const HomeScreen = ({navigation}: any) => {
           }
           data={productsObj.products}
           numColumns={2}
-          onEndReached={() => console.log('hi')}
           renderItem={({item, index}: any) => (
             <ProductComponent
               onPress={() =>
