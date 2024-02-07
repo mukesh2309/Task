@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {gray, primary} from '../../theme/colors';
+import {black, gray, primary} from '../../theme/colors';
 import {font} from '../../theme/fonts';
 import {text} from '../../theme/size';
 import {spacing} from '../../theme/spacing';
@@ -22,11 +22,11 @@ const AppBar = ({title, rightIcon, leftIcon}: AppBarProps) => {
             <MaterialIcons
               size={spacing[28]}
               name="chevron-left"
-              color={primary[900]}
+              color={black[900]}
             />
           </Pressable>
         )}
-        <TextComponent size={text.medium} style={styles.title}>
+        <TextComponent size={text.large} color={black[900]} style={styles.title}>
           {title}
         </TextComponent>
       </View>
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   flexRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    columnGap : spacing[8]
   },
   title: {
     fontFamily: font.Regular,

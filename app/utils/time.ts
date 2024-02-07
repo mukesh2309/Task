@@ -2,7 +2,6 @@ import {Platform} from 'react-native';
 
 export const getTimestamp = (time: string, onlyDayAndMonth?: boolean) => {
   if (time) {
-    console.log('time: ', time);
     const inputDate = new Date(time);
     const currentDate = new Date();
     const yesterdayDate = new Date();

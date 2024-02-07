@@ -1,29 +1,87 @@
 import React from 'react';
-import { FlatList, Image, View } from 'react-native';
-import { spacing } from '../../theme/spacing';
+import {FlatList, StyleSheet, View} from 'react-native';
+import Button from '../../components/button/component';
+import ItemComponent from '../../components/item/component';
+import Wrapper from '../../components/wrapper /component';
+import {black, gray, white} from '../../theme/colors';
+import {spacing} from '../../theme/spacing';
+import TextComponent from '../../components/text/component';
+import { font } from '../../theme/fonts';
 
+interface list {
+  id: number;
+  name: string;
+  price: number;
+  img: string;
+}
 const CartScreen = () => {
   return (
-    <FlatList
-         pagingEnabled
-          data={[232, 23, 23, 2]}
-          horizontal
-          renderItem={() => {
-            return (
-              <View style={{
-                backgroundColor :'red',
-                height : spacing.value(200),
-                width : spacing.value(200)
-              }}>
-                <Image style={{
-                  width : spacing.value(200),
-                  height : spacing.value(200)
-                }} source={{uri: 'https://picsum.photos/200/300'}} />
-              </View>
-            );
-          }}
+    <Wrapper
+      isLoading={false}
+      isAppBar={true}
+      appBar={{
+        title: `Shopping Cart (${5})`,
+      }}
+      statusbar={{
+        backgroundColor: white[900],
+        barStyle: 'dark-content',
+      }}>
+      <View style={styles.flatList}>
+        <FlatList
+          data={[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 22, 2]}
+          renderItem={({item, index}: any) => (
+            <ItemComponent id={0} name={''} price={0} img={''} />
+          )}
         />
-  )
-}
+      </View>
+      <View style={styles.total}>
+        <List name="Subtotal" price={25.96} />
+        <List name="Delivery" price={25.96} />
+        <List name="Total" price={25.96} />
+      </View>
+      <View style={styles.btn}>
+        <Button name="Proceed To checkout" />
+      </View>
+    </Wrapper>
+  );
+};
 
-export default CartScreen
+const List = ({name, price}: list) => {
+  return (
+    <View style={styles.list}>
+      <TextComponent  color={black[100]}>{name}</TextComponent>
+      <TextComponent color={black[900]}>${price}</TextComponent>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  btn: {
+    position: 'absolute',
+    bottom: spacing[20],
+    left: spacing[10],
+    right: spacing[10],
+  },
+  flatList: {
+    height: spacing.value(420),
+  },
+  total: {
+    paddingBottom : spacing.value(100),
+    position: 'absolute',
+    bottom: 0,
+    left: spacing[10],
+    right: spacing[10],
+    borderRadius : spacing[24],
+    backgroundColor: gray[100],
+    paddingHorizontal: spacing[24],
+    paddingVertical : spacing[12]
+  },
+  list: {
+    paddingVertical : spacing.value(10),
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+});
+
+export default CartScreen;

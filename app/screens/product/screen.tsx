@@ -1,21 +1,21 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {useSelector} from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import Button from '../../components/button/component';
 import Cart from '../../components/cart/component';
+import PriceComponent from '../../components/price/component';
 import Rating from '../../components/rating/component';
 import Swiper from '../../components/swiper/component';
 import TextComponent from '../../components/text/component';
 import Wrapper from '../../components/wrapper /component';
 import ProductsService from '../../services/product/service';
-import {RootState} from '../../store/provider';
-import {black, primary} from '../../theme/colors';
-import {font} from '../../theme/fonts';
-import {text} from '../../theme/size';
-import {spacing} from '../../theme/spacing';
-import {trunCateStringWith3Dots} from '../../utils/truncateWithThreeDots';
-import PriceComponent from '../../components/price/component';
-import Button from '../../components/button/component';
+import { RootState } from '../../store/provider';
+import { black, white } from '../../theme/colors';
+import { font } from '../../theme/fonts';
+import { text } from '../../theme/size';
+import { spacing } from '../../theme/spacing';
+import { trunCateStringWith3Dots } from '../../utils/truncateWithThreeDots';
 
 interface ProductScreenProps {
   route: {
@@ -52,7 +52,7 @@ const ProductScreen = ({route}: ProductScreenProps) => {
           />
         ),
       }}
-      statusbar={{backgroundColor: primary[900], barStyle: 'light-content'}}>
+      statusbar={{backgroundColor: white[900], barStyle: 'dark-content'}}>
       <View style={styles.header}>
         <TextComponent
           color={black[900]}
@@ -82,9 +82,10 @@ const ProductScreen = ({route}: ProductScreenProps) => {
           type="outlined"
           name="Add to Cart"
           onPress={() => {}}
-          style={styles.btn}
         />
-        <Button name="Buy Now" onPress={() => {}} style={styles.btn} />
+        <Button name="Buy Now" onPress={() => {
+          navigation.navigate('CartScreen');
+        }} />
       </View>
         <View style={styles.description}>
           <TextComponent
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    marginTop: -spacing[14],
+    marginTop: -spacing[8],
     fontFamily: font.ExtraBold,
   },
   header: {

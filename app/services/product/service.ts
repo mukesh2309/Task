@@ -30,7 +30,6 @@ export default class ProductsService {
       const res = await fetch(url);
       if (res.ok) {
         const data = await res.json();
-        console.log('data',data)
         store.dispatch(setProduct(data));
         return data;
       }
