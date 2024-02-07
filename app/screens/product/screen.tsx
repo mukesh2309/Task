@@ -2,17 +2,17 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
+import Cart from '../../components/cart/component';
+import Rating from '../../components/rating/component';
+import Swiper from '../../components/swiper/component';
+import TextComponent from '../../components/text/component';
+import Wrapper from '../../components/wrapper /component';
 import ProductsService from '../../services/product/service';
 import { RootState } from '../../store/provider';
-import { font } from '../../theme/fonts';
-import { spacing } from '../../theme/spacing';
-import Wrapper from '../../components/wrapper /component';
-import Cart from '../../components/cart/component';
 import { black, primary } from '../../theme/colors';
+import { font } from '../../theme/fonts';
 import { text } from '../../theme/size';
-import Rating from '../../components/rating/component';
-import TextComponent from '../../components/text/component';
-import Swiper from '../../components/swiper/component';
+import { spacing } from '../../theme/spacing';
 
 interface ProductScreenProps {
   route: {
@@ -63,10 +63,10 @@ const ProductScreen = ({route}: ProductScreenProps) => {
           {product?.title}
         </TextComponent>
         <Rating rating={product.rating} review={133} />
-        <Swiper
+      </View>
+      <Swiper
         images={product?.images}
         />
-      </View>
     </Wrapper>
   );
 };
