@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
 import ListComponent from '../../components/listComponent/component';
 import ProductComponent from '../../components/product/component';
 import TextComponent from '../../components/text/component';
 import Wrapper from '../../components/wrapper /component';
 import ProductsService from '../../services/product/service';
-import { RootState } from '../../store/provider';
-import { black, primary } from '../../theme/colors';
-import { text } from '../../theme/size';
-import { spacing } from '../../theme/spacing';
+import {RootState} from '../../store/provider';
+import {black, primary} from '../../theme/colors';
+import {text} from '../../theme/size';
+import {spacing} from '../../theme/spacing';
 import HomeView from '../../views/home/view';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}: any) => {
   const productSvc = new ProductsService('products');
 
-  const data: any = useSelector((state: RootState) => state.products.data);
+  const productsObj : any = useSelector((state: RootState) => state.products);
+  
 
   useEffect(() => {
     productSvc.getProducts();
@@ -23,6 +24,7 @@ const HomeScreen = () => {
 
   return (
     <Wrapper
+      isLoading={productsObj.loading}
       statusbar={{
         backgroundColor: primary[900],
         barStyle: 'light-content',
@@ -54,11 +56,12 @@ const HomeScreen = () => {
               </TextComponent>
             </View>
           }
-          data={data.products}
+          data={productsObj.data.products}
           numColumns={2}
           onEndReached={() => console.log('hi')}
           renderItem={({item, index}) => (
             <ProductComponent
+              onPress={() => navigation.navigate('ProductScreen', item?.id)}
               price={item?.price}
               title={item?.title}
               image={item?.images[0]}
@@ -74,15 +77,14 @@ const HomeScreen = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingHorizontal: spacing[20],
     paddingBottom: spacing.value(90),
   },
-  header :{
-    marginHorizontal : -spacing.value(20)
+  header: {
+    marginHorizontal: -spacing.value(20),
   },
   title: {
     paddingTop: spacing[10],
-    paddingHorizontal : spacing[20]
+    paddingHorizontal: spacing[20],
   },
   flatList: {
     paddingHorizontal: spacing[20],

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 import { black, gray } from '../../theme/colors';
 import { text } from '../../theme/size';
 import { spacing } from '../../theme/spacing';
@@ -13,11 +13,12 @@ interface IProductsProps {
   key: number;
   price: string;
   title: string;
+  onPress : () => void;
 }
 
-const ProductComponent = ({image, key, price, title}: IProductsProps) => {
+const ProductComponent = ({image, key, price, title,onPress}: IProductsProps) => {
   return (
-    <View key={key} style={styles.container}>
+    <Pressable onPress={onPress} key={key} style={styles.container}>
       <LikeBtn/>
       <Image style={styles.image} source={{uri: image}} />
       <View style={styles.productPrice}>
@@ -29,7 +30,7 @@ const ProductComponent = ({image, key, price, title}: IProductsProps) => {
         </View>
         <CartBtn />
       </View>
-    </View>
+    </Pressable>
   );
 };
 

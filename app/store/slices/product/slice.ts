@@ -8,7 +8,7 @@ export interface IProduct {
 
 const initialState: IProduct = {
   data: [],
-  loading: false,
+  loading: true,
   hasMore: true,
 };
 
@@ -16,11 +16,9 @@ const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    setLoading: (state, action) => {
-      state.loading = action.payload;
-    },
     setProducts: (state, action) => {
       state.data = action.payload;
+      state.loading = false
     },
     setProduct: (state, action) => {
       state.data = action.payload;
@@ -28,6 +26,6 @@ const productSlice = createSlice({
   },
 });
 
-export const {setLoading, setProduct, setProducts} = productSlice.actions;
+export const { setProduct, setProducts} = productSlice.actions;
 
 export default productSlice.reducer;

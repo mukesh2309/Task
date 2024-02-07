@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {StyleSheet} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../appbar/component';
-import { useStatusBar } from '../../utils/statusBar';
+import {useStatusBar} from '../../utils/statusBar';
+import LoadingComponent from '../loader/component';
 
 interface IStatusBar {
   backgroundColor: string;
@@ -14,12 +15,14 @@ interface WrapperProps {
   style?: object;
   statusbar?: IStatusBar;
   isAppBar?: boolean;
+  isLoading?: boolean;
 }
 
 const Wrapper = ({
   children,
   style,
   isAppBar = false,
+  isLoading = false,
   statusbar = {
     backgroundColor: '#fff',
     barStyle: 'dark-content',
@@ -29,6 +32,7 @@ const Wrapper = ({
   return (
     <SafeAreaView style={[styles.container, style]}>
       {isAppBar && <AppBar />}
+      {isLoading ? <LoadingComponent /> : null}
       {children}
     </SafeAreaView>
   );
