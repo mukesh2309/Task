@@ -3,6 +3,7 @@ import {Pressable, StyleSheet} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {black, red} from '../../theme/colors';
 import {spacing} from '../../theme/spacing';
+import {useFocusEffect} from '@react-navigation/native';
 
 interface LikeBtnProps {
   onPress: (e: any) => void;
@@ -11,22 +12,16 @@ interface LikeBtnProps {
 }
 
 const LikeBtn = ({onPress, style, isLiked}: LikeBtnProps) => {
-  const [like, setLike] = React.useState(false);
-  const name = like ? 'heart' : 'hearto';
-  const color = like ? red[800] : black[400];
+  const name = isLiked ? 'heart' : 'hearto';
+  const color = isLiked ? red[800] : black[400];
 
   const styles = getStyles();
 
   const handleLike = () => {
-    setLike(!like);
     if (onPress) {
-      onPress(like);
+      onPress(isLiked);
     }
   };
-
-  useEffect(() => {
-    setLike(isLiked);
-  }, [isLiked]);
 
   return (
     <Pressable onPress={handleLike} style={[styles.container, style]}>

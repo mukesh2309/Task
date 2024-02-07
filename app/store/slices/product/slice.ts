@@ -24,15 +24,21 @@ const productSlice = createSlice({
       state.data = {
         ...action.payload,
         loading: false,
+        products: action.payload.products.map((product: any) => ({
+          ...product,
+          isLiked: false,
+        })),
       };
     },
+
     setProduct: (state, action) => {
       state.data.products = state.data.products.map((product: any) =>
         product.id === action.payload.id
-          ? {...product, ...action.payload}
+          ? {...product, ...action.payload, isLiked: false}
           : product,
       );
     },
+
     addToCart: (state, action) => {
       const {id, quantity} = action.payload;
       const product = state.data.products.find(
@@ -55,15 +61,19 @@ const productSlice = createSlice({
       }
     },
     addToLike: (state, action) => {
-      const { id } = action.payload;
-      const likedProduct = state.data.products.find((product: any) => product.id === id);
+      const {id} = action.payload;
+      const likedProduct = state.data.products.find(
+        (product: any) => product.id === id,
+      );
       if (likedProduct) {
         likedProduct.isLiked = true;
       }
     },
     removeFromLike: (state, action) => {
-      const { id } = action.payload;
-      const likedProduct = state.data.products.find((product: any) => product.id === id);
+      const {id} = action.payload;
+      const likedProduct = state.data.products.find(
+        (product: any) => product.id === id,
+      );
       if (likedProduct) {
         likedProduct.isLiked = false;
       }
@@ -71,7 +81,13 @@ const productSlice = createSlice({
   },
 });
 
-export const {setProduct, setProducts, addToCart, removeFromCart,addToLike,removeFromLike} =
-  productSlice.actions;
+export const {
+  setProduct,
+  setProducts,
+  addToCart,
+  removeFromCart,
+  addToLike,
+  removeFromLike,
+} = productSlice.actions;
 
 export default productSlice.reducer;

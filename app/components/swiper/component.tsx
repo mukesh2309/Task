@@ -11,8 +11,9 @@ const width = Dimensions.get('window').width;
 interface SwiperProps {
   images: [];
   id: number;
+  isLiked : boolean;
 }
-const Swiper = ({images, id}: SwiperProps) => {
+const Swiper = ({images, id,isLiked}: SwiperProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const viewableItemsChanged = ({viewableItems}) => {
@@ -58,7 +59,7 @@ const Swiper = ({images, id}: SwiperProps) => {
           onPress={e => {
             !e ? dispatch(addToLike({id})) : dispatch(removeFromLike({id}));
           }}
-          isLiked={false}
+          isLiked={isLiked}
           style={{
             marginTop: spacing[4],
             marginLeft: spacing[4],

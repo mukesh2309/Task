@@ -70,7 +70,9 @@ const ProductScreen = ({route}: ProductScreenProps) => {
         </TextComponent>
         <Rating rating={product.rating} review={133} />
       </View>
-      <Swiper id={product?.id} images={product?.images} />
+      <Swiper id={product?.id} images={product?.images} 
+      isLiked={product?.isLiked}
+      />
       <View style={styles.price}>
         <PriceComponent size={text.value(20)} price={product?.price} />
         <PriceComponent

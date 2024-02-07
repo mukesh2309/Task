@@ -72,7 +72,7 @@ const HomeScreen = ({navigation}: any) => {
                   ? dispatch(addToLike({id: item?.id}))
                   : dispatch(removeFromLike({id: item?.id}));
               }}
-              isLiked={false}
+              isLiked={item?.isLiked}
               onCartPress={e => {
                 !e
                   ? dispatch(addToCart({id: item?.id, quantity: 1}))
