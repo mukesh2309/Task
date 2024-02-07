@@ -90,10 +90,19 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+         release {
+            storeFile file('my-key.keystore')
+            storePassword 'mukesh'
+            keyAlias 'my-key-alias'
+            keyPassword 'mukesh'
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.release
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
