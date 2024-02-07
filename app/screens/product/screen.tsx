@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Button from '../../components/button/component';
 import Cart from '../../components/cart/component';
 import PriceComponent from '../../components/price/component';
@@ -16,6 +16,7 @@ import {font} from '../../theme/fonts';
 import {text} from '../../theme/size';
 import {spacing} from '../../theme/spacing';
 import {trunCateStringWith3Dots} from '../../utils/truncateWithThreeDots';
+import {addToCart} from '../../store/slices/product/slice';
 
 interface ProductScreenProps {
   route: {
@@ -33,11 +34,16 @@ const ProductScreen = ({route}: ProductScreenProps) => {
   const product = productsObj.products.find((item: any) => item.id === id);
   const cart = useSelector((state: RootState) => state.products.cart);
   const cartCount = cart?.length.toString() || '0';
+  const isAdded = cart?.some((item: any) => item.id === id);
+  const [add, setAdd] = useState(isAdded);
 
   useEffect(() => {
     setLoading(true);
+    setAdd(isAdded);
     productSvc.getProduct(id).finally(() => setLoading(false));
   }, []);
+
+  const dispatch = useDispatch();
 
   return (
     <Wrapper
@@ -70,8 +76,10 @@ const ProductScreen = ({route}: ProductScreenProps) => {
         </TextComponent>
         <Rating rating={product.rating} review={133} />
       </View>
-      <Swiper id={product?.id} images={product?.images} 
-      isLiked={product?.isLiked}
+      <Swiper
+        id={product?.id}
+        images={product?.images}
+        isLiked={product?.isLiked}
       />
       <View style={styles.price}>
         <PriceComponent size={text.value(20)} price={product?.price} />
@@ -82,7 +90,15 @@ const ProductScreen = ({route}: ProductScreenProps) => {
         />
       </View>
       <View style={styles.btnContainer}>
-        <Button type="outlined" name="Add to Cart" onPress={() => {}} />
+        <Button
+          disabled={add}
+          type="outlined"
+          name={add ? 'Added' : 'Add To Cart'}
+          onPress={() => {
+            setAdd(true);
+            dispatch(addToCart({id: id, quantity: 1}));
+          }}
+        />
         <Button
           name="Buy Now"
           onPress={() => {
