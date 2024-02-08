@@ -1,7 +1,6 @@
 import React from 'react';
-import { FlatList } from 'react-native';
-import { listcomponent } from './type';
-
+import {FlatList} from 'react-native';
+import {listcomponent} from './type';
 
 const ListComponent = ({
   data,
@@ -12,14 +11,15 @@ const ListComponent = ({
   onScroll,
   ListHeaderComponent,
   style,
-  contentContainerStyle
+  contentContainerStyle,
+  isHorizontal = false
 }: listcomponent) => {
-
   return (
     <FlatList
-    style={style}
-    contentContainerStyle={contentContainerStyle}
-     ListHeaderComponent={ListHeaderComponent}
+      style={style}
+      horizontal={isHorizontal}
+      contentContainerStyle={contentContainerStyle}
+      ListHeaderComponent={ListHeaderComponent}
       columnWrapperStyle={{justifyContent: 'space-between'}}
       overScrollMode={overScrollMode}
       data={data}

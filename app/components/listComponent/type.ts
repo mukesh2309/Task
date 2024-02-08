@@ -13,4 +13,5 @@ export interface listcomponent {
   ListHeaderComponent: React.ReactNode | any;
   style : any;
   contentContainerStyle : any;
+  isHorizontal : boolean;
 }
