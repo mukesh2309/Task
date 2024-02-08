@@ -3,7 +3,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import Button from '../../components/button/component';
 import ItemComponent from '../../components/item/component';
 import TextComponent from '../../components/text/component';
-import Wrapper from '../../components/wrapper /component';
+import Wrapper from '../../components/wrapper/component';
 import {black, gray, white} from '../../theme/colors';
 import {spacing} from '../../theme/spacing';
 import {useDispatch, useSelector} from 'react-redux';

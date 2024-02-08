@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import ListComponent from '../../components/listComponent/component';
 import ProductComponent from '../../components/product/component';
 import TextComponent from '../../components/text/component';
-import Wrapper from '../../components/wrapper /component';
+import Wrapper from '../../components/wrapper/component';
 import ProductsService from '../../services/product/service';
 import {RootState} from '../../store/provider';
 import {black, primary} from '../../theme/colors';

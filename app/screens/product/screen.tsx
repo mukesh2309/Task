@@ -8,7 +8,7 @@ import PriceComponent from '../../components/price/component';
 import Rating from '../../components/rating/component';
 import Swiper from '../../components/swiper/component';
 import TextComponent from '../../components/text/component';
-import Wrapper from '../../components/wrapper /component';
+import Wrapper from '../../components/wrapper/component';
 import ProductsService from '../../services/product/service';
 import {RootState} from '../../store/provider';
 import {black, white} from '../../theme/colors';
