@@ -16,7 +16,7 @@ interface IProductsProps {
   onPress: () => void;
   onCartPress: (e: any) => void;
   isLiked: boolean;
-  onLikePress: (e:any) => void;
+  onLikePress: (e: any) => void;
 }
 
 const ProductComponent = ({
@@ -49,15 +49,23 @@ const ProductComponent = ({
 const styles = StyleSheet.create({
   container: {
     height: spacing.value(220),
-    maxWidth: spacing.value(160),
+    width: spacing.value(170),
     borderRadius: spacing[12],
     justifyContent: 'space-between',
     backgroundColor: gray[100],
     marginTop: spacing[20],
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: .85,
+    elevation: 1,
   },
   image: {
     height: spacing.value(160),
-    width: spacing.value(160),
+    width: spacing.value(170),
     borderTopLeftRadius: spacing[12],
     borderTopRightRadius: spacing[12],
   },
