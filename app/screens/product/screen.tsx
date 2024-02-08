@@ -40,7 +40,9 @@ const ProductScreen = ({route}: ProductScreenProps) => {
   useEffect(() => {
     setLoading(true);
     setAdd(isAdded);
-    productSvc.getProduct(id).finally(() => setLoading(false));
+    if (!product) {
+      productSvc.getProduct(id).finally(() => setLoading(false));
+    }
   }, []);
 
   const dispatch = useDispatch();

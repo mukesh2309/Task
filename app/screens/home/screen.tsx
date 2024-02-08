@@ -64,30 +64,30 @@ const HomeScreen = ({navigation}: any) => {
           }
           data={productsObj.products}
           numColumns={2}
-          renderItem={({item, index}: any) => (
-            <ProductComponent
-              onLikePress={e => {
-                !e
-                  ? dispatch(addToLike({id: item?.id}))
-                  : dispatch(removeFromLike({id: item?.id}));
-              }}
-              isLiked={item?.isLiked}
-              onCartPress={e => {
-                !e
-                  ? dispatch(addToCart({id: item?.id, quantity: 1}))
-                  : dispatch(removeFromCart({id: item?.id, quantity: 1}));
-              }}
-              onPress={() =>
-                navigation.navigate('ProductScreen', {
-                  id: item?.id,
-                })
-              }
-              price={item?.price}
-              title={item?.title}
-              image={item?.images[0]}
-              key={item.id}
-            />
-          )}
+          renderItem={({item, index}: any) => {
+            return <ProductComponent
+            onLikePress={e => {
+              !e
+                ? dispatch(addToLike({id: item?.id}))
+                : dispatch(removeFromLike({id: item?.id}));
+            }}
+            isLiked={item?.isLiked}
+            onCartPress={e => {
+              !e
+                ? dispatch(addToCart({id: item?.id, quantity: 1}))
+                : dispatch(removeFromCart({id: item?.id, quantity: 1}));
+            }}
+            onPress={() =>
+              navigation.navigate('ProductScreen', {
+                id: item?.id,
+              })
+            }
+            price={item?.price}
+            title={item?.title}
+            image={item?.images[0]}
+            key={item.id}
+          />
+          }}
         />
       </View>
     </Wrapper>
